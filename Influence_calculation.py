@@ -12,6 +12,10 @@ class InfluenceCalculator:
 		3. Create sparse W (unnormalized, eventually signed)
 		"""
 		self.signed_W = signed
+		meta, elist = self._load_sql_data(filename)
+		self._create_neuron_W_id_mapping(elist)
+		self._create_sparse_W(meta, elist)
+		
 		pass
 
 	def _load_sql_data(self, filename):
@@ -62,6 +66,7 @@ class InfluenceCalculator:
 		self.id_to_index = id_to_index
 		self.index_to_id = index_to_id
 		self.n_neurons = n_neurons
+		
 
 	def _create_sparse_W(self, meta, elist, syn_weight_measure='norm'):
 
@@ -103,7 +108,7 @@ class InfluenceCalculator:
 		
 		self.W = matrix
 
-	def _normalize_W(W_norm):
+	def _normalize_W(self, W_norm):
 
 		# Compute the largest eigenvalue
 		eps = SLEPc.EPS().create()
@@ -126,7 +131,7 @@ class InfluenceCalculator:
 
 		return W_norm
 
-	def _solve_lin_system(W_norm, s):
+	def _solve_lin_system(self, W_norm, s):
 		"""
 		Solves the system W_norm * x = s
 		"""
@@ -186,11 +191,12 @@ class InfluenceCalculator:
 			silenced_indices_temp = np.array([self.id_to_index[id] for id in silenced_neurons if id in self.id_to_index])
 			exclusion_indices = np.where(seed_vec==1)[0]
 			silenced_indices = np.setdiff1d(silenced_indices_temp, exclusion_indices)
-			W_norm = self._set_columns_to_zero(self, silenced_indices)
-
-		# normalize W_norm and remove I
-		W_norm = self._normalize_W(W_norm)
-
+			W_norm = self._set_columns_to_zero(silenced_indices)
+		else:
+			# If no silencing
+			W_norm = self.W.copy()
+			
+		W_norm = self.normalize_W(W_norm)
 		influence_vec = self._solve_lin_system(W_norm, -seed_vec)
 
 		# turn influence_vec into panda table with rows (neuron_id, influence, part_of_seed)
