@@ -205,7 +205,7 @@ class InfluenceCalculator:
 		seed_vec[seed_indices] = 1
 
 		# Inhibit specific neurons
-		if silenced_neurons:
+		if len(silenced_neurons)>0:
 			# Map to W indices and exclude seed neurons 
 			silenced_indices_temp = np.array([self.id_to_index[id] for id in silenced_neurons if id in self.id_to_index])
 			exclusion_indices = np.where(seed_vec==1)[0]
@@ -243,11 +243,11 @@ if __name__ == "__main__":
     # Get neuron ids to inhibit (sensory neurons in this case)
     silenced_neurons = ic.meta[
         ic.meta['super_class'].isin(['sensory',
-                                     'ascending_sensory'])].neuron_id
+                                     'ascending_sensory'])].root_id
 
     for seed_category in seed_categories:
         # Get seed neuron ids
-        seed_ids = ic.meta[ic.meta[meta_column] == seed_category].neuron_id 
+        seed_ids = ic.meta[ic.meta[meta_column] == seed_category].root_id 
 
         influence_df = None
         influence_df = ic.calculate_influence(seed_ids, silenced_neurons)
