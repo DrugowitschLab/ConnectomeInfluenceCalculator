@@ -6,15 +6,19 @@ from slepc4py import SLEPc
 from bidict import bidict
 
 
+# list of neurotransmitters that will receive negative signs if requested
+NEG_NEUROTRANSMITTERS = {'glutamate', 'gaba', 'serotonin', 'octopamine'}
+
+
 class InfluenceCalculator:
     def __init__(self, filename, signed=False):
         """
-        Creates an instance of the class by loading SQL data with the given
-        filename, establish a neuron_id <-> W_id mapping (using bidict), and
-        create a sparse W matrix that contains the synapse count
+        Creates a class instance by loading SQL data with the given
+        filename, establishing a neuron_id <-> W_id mapping (using bidict), and
+        by creating a sparse W matrix that contains the synapse count
         (signed if signed=True).
         """
-        self.signed_W = signed
+        self.W_signed = signed
         elist = self._load_sql_data(filename)
         self._create_neuron_W_id_mapping(elist)
         self._create_sparse_W(elist)
@@ -74,10 +78,9 @@ class InfluenceCalculator:
         sparse connectivity matrix W.
         """
         # If W ought to be signed, change relevant edge list entries
-        if self.signed_W:
-            negative_nt = {'glutamate', 'gaba', 'serotonin', 'octopamine'}
+        if self.W_signed:
             # Create a boolean mask for rows in meta that meet our conditions
-            mask = (self.meta['top_nt'].isin(negative_nt) &
+            mask = (self.meta['top_nt'].isin(NEG_NEUROTRANSMITTERS) &
                     self.meta['id'].isin(elist['pre']))
             # Get the ids that need to be updated
             ids_to_update = set(self.meta.loc[mask, 'id'])
@@ -208,11 +211,8 @@ class InfluenceCalculator:
         influence_df.loc[influence_df['id'].isin(seed_ids), 'is_seed'] = True
 
         # Add the new influence score column
-        if self.signed_W:
-            signed_W = 'signed'
-        else:
-            signed_W = 'unsigned'
-        column_name = f"Influence_score_({signed_W})"
+        W_signed_str = 'signed' if self.W_signed else 'unsigned'
+        column_name = f"Influence_score_({W_signed_str})"
         influence_df[column_name] = influence_vec
 
         return influence_df
