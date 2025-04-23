@@ -5,22 +5,25 @@ from petsc4py import PETSc
 from slepc4py import SLEPc
 from bidict import bidict
 
+
 class InfluenceCalculator:
     def __init__(self, filename, signed=False):
         """
-        1. Load SQL data
-        2. Create neuron_id -> W_id mapping, W_id -> neuron_id mapping (using
-           bidict)
-        3. Create sparse W (unnormalized, eventually signed)
+        Creates an instance of the class by loading SQL data with the given
+        filename, establish a neuron_id <-> W_id mapping (using bidict), and
+        create a sparse W matrix that contains the synapse count
+        (signed if signed=True).
         """
         self.signed_W = signed
         elist = self._load_sql_data(filename)
         self._create_neuron_W_id_mapping(elist)
         self._create_sparse_W(elist)
-        
-        pass
 
     def _load_sql_data(self, filename):
+        """This method opens an SQLite database with the given filename,
+        loads and stores metadata, and loads and returns a list of edges
+        in the connectivity graph.
+        """
         # Connect to the SQLite database
         conn = sqlite3.connect(filename)
 
@@ -33,7 +36,7 @@ class InfluenceCalculator:
         print("Tables in the database:", tables)
 
         # Get the meta data, cell types, etc.
-        meta = pd.read_sql_query("SELECT * FROM meta", conn)
+        self.meta = pd.read_sql_query("SELECT * FROM meta", conn)
 
         # Construct the SQL query for the edgelist and add condition on minimum
         # synaptic count (here, min=5)
@@ -43,34 +46,34 @@ class InfluenceCalculator:
         WHERE count >= 5
         """
 
-        # Execute the query and collect the results
+        # Execute the query, collect the results, and close the db connection
         elist = pd.read_sql_query(query, conn)
-
-        # Add 'post_count' column to elist
-        elist['post_count'] = np.round(elist['count']/elist['norm'])
-
-        # Close the database connection
         conn.close()
 
-        self.meta = meta
-        
+        # Add 'post_count' column to elist and return
+        elist['post_count'] = np.round(elist['count']/elist['norm'])
         return elist
 
     def _create_neuron_W_id_mapping(self, elist):
+        """This method uses the list of edges to find unique neuron ids,
+        and create a bidirectional mapping from neuron IDs to rows and
+        columns in the W matrix.
+        """
         # Find unique neuron ids
         unique_ids = pd.unique(np.hstack([elist['post'].to_numpy(), 
                                           elist['pre'].to_numpy()]))
         # Number of neurons
-        n_neurons = len(unique_ids)
+        self.n_neurons = len(unique_ids)
         
         # Create a bidirectional mapping from neuron IDs to matrix indices.
         self.id_to_index = bidict(
             {neuron_id: idx for idx, neuron_id in enumerate(unique_ids)})
-        self.n_neurons = n_neurons      
 
     def _create_sparse_W(self, elist, syn_weight_measure='norm'):
-        # If signed W, change synaptic count to negative in elist for
-        # inhibitory neurons
+        """This method takes the edge list, and uses it to populate the
+        sparse connectivity matrix W.
+        """
+        # If W ought to be signed, change relevant edge list entries
         if self.signed_W:
             negative_nt = {'glutamate', 'gaba', 'serotonin', 'octopamine'}
             # Create a boolean mask for rows in meta that meet our conditions
@@ -94,22 +97,29 @@ class InfluenceCalculator:
         post_ind = post_ind[mask].astype(int)
         syn_weights = syn_weights[mask]
 
-        """Create a sparse random matrix using PETSc"""
-        matrix = PETSc.Mat().create()
-        matrix.setSizes([self.n_neurons, self.n_neurons])
-        matrix.setFromOptions()
-        matrix.setType('aij')  # sparse matrix
-        matrix.setUp()
+        # Create a sparse matrix using PETSc, and populate from edge list
+        W = PETSc.Mat().create()
+        W.setSizes([self.n_neurons, self.n_neurons])
+        W.setFromOptions()
+        W.setType('aij')  # sparse matrix
+        W.setUp()
 
         for i, j, v in zip(post_ind, pre_ind, syn_weights):
-            matrix.setValue(i, j, v, addv=True)
+            W.setValue(i, j, v, addv=True)
 
-        matrix.assemblyBegin()
-        matrix.assemblyEnd()
+        W.assemblyBegin()
+        W.assemblyEnd()
         
-        self.W = matrix
+        self.W = W
 
     def _normalize_W(self, W_norm):
+        """Rescale W_norm matrix to ensure that largest real eigenvalue is
+        0.99, and then subtract identity matrix. This ensures that the largest
+        real eigenvalue of W_norm is -0.01.
+
+        Please note that this method directly modifies W_norm without creating
+        a copy.
+        """
         # Compute the largest eigenvalue
         eps = SLEPc.EPS().create()
         eps.setOperators(W_norm)
@@ -124,7 +134,7 @@ class InfluenceCalculator:
 
         eig_val_largest = eps.getEigenvalue(0).real
 
-        # Create W = alpha*connectivity_matrix - I
+        # Create W = alpha * W - I
         alpha = 0.99 / eig_val_largest
         W_norm.scale(alpha)
         W_norm.shift(-1.0)
@@ -132,17 +142,15 @@ class InfluenceCalculator:
         return W_norm
 
     def _solve_lin_system(self, W_norm, s):
+        """Solves the system W_norm * x = s and returns x.
         """
-        Solves the system W_norm * x = s
-        """
-        
         b = PETSc.Vec().createWithArray(s, comm=PETSc.COMM_SELF)
 
         ksp = PETSc.KSP().create()
         ksp.setOperators(W_norm)
-        ksp.setType(PETSc.KSP.Type.GMRES)  # or another appropriate solver type
+        ksp.setType(PETSc.KSP.Type.GMRES)  # could use another solver type
         pc = ksp.getPC()
-        pc.setType(PETSc.PC.Type.ILU)  # or another appropriate preconditioner
+        pc.setType(PETSc.PC.Type.ILU)  # could use another preconditioner
 
         x = W_norm.createVecRight()
         ksp.solve(b, x)
@@ -150,6 +158,9 @@ class InfluenceCalculator:
         return x
     
     def _set_columns_to_zero(self, silenced_neurons):
+        """This method returns a copy of W with the columns listed in
+        the silenced_neurons (given by neuron_ids) set to zero.
+        """
         # Copy W
         W_norm = self.W.copy()
 
@@ -177,6 +188,10 @@ class InfluenceCalculator:
         return W_norm
     
     def _build_influence_dataframe(self, influence_vec, seed_vec):
+        """This method turns the influence vector influence_vec and turns it
+        into a pandas dataframe that lists neuron_ids with influence score
+        and whether each neuron has been a seed neuron.
+        """
         influence_vec = np.abs(np.real(influence_vec))
 
         seed_indices = np.where(seed_vec == 1)[0]
@@ -203,6 +218,10 @@ class InfluenceCalculator:
         return influence_df
 
     def calculate_influence(self, seed_ids, silenced_neurons=[]):
+        """This method calculates the influence score for the given
+        seed id and list of silenced neurons. It returns the results
+        as a pandas dataframe.
+        """
         # map seed_ids to W_ids to get seed_vec     
         seed_vec = np.zeros(self.n_neurons)
         seed_indices = []
