@@ -215,7 +215,7 @@ class InfluenceCalculator:
 			# If no silencing
 			W_norm = self.W.copy()
 			
-		W_norm = self.normalize_W(W_norm)
+		W_norm = self._normalize_W(W_norm)
 		influence_vec = self._solve_lin_system(W_norm, -seed_vec)
 		influence_df = self._build_influence_dataframe(influence_vec, seed_vec)
 
