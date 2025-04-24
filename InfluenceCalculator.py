@@ -144,8 +144,6 @@ class InfluenceCalculator:
         W_norm.scale(alpha)
         W_norm.shift(-1.0)
 
-        return W_norm
-
     @staticmethod
     def _solve_lin_system(W_norm, s):
         """Solves the system W_norm * x = s and returns x.
@@ -247,7 +245,7 @@ class InfluenceCalculator:
             # If no silencing
             W_norm = self.W.copy()
             
-        W_norm = self._normalize_W(W_norm)
+        self._normalize_W(W_norm)
         influence_vec = self._solve_lin_system(W_norm, -seed_vec)
         influence_df = self._build_influence_dataframe(influence_vec, seed_vec)
 
