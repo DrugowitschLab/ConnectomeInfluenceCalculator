@@ -96,12 +96,6 @@ class InfluenceCalculator:
         pre_ind = elist['pre'].map(self.id_to_index)
         post_ind = elist['post'].map(self.id_to_index)
 
-        # Remove connections involving neurons not in the specified dataset
-        mask = (~pre_ind.isna()) & (~post_ind.isna())
-        pre_ind = pre_ind[mask].astype(int)
-        post_ind = post_ind[mask].astype(int)
-        syn_weights = syn_weights[mask]
-
         # Create a sparse matrix using PETSc, and populate from edge list
         W = PETSc.Mat().create()
         W.setSizes([self.n_neurons, self.n_neurons])
