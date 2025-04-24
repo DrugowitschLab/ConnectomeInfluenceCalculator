@@ -146,6 +146,7 @@ class InfluenceCalculator:
 
         return W_norm
 
+    @staticmethod
     def _solve_lin_system(W_norm, s):
         """Solves the system W_norm * x = s and returns x.
         """
