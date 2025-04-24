@@ -162,9 +162,9 @@ class InfluenceCalculator:
 
         return x
     
-    def _set_columns_to_zero(self, silenced_neurons):
+    def _set_columns_to_zero(self, silenced_W_idcs):
         """This method returns a copy of W with the columns listed in
-        the silenced_neurons (given by neuron_ids) set to zero.
+        the silenced_W_idcs (given by W indices of silenced neurons) set to zero.
         """
         # Copy W
         W_norm = self.W.copy()
@@ -172,16 +172,16 @@ class InfluenceCalculator:
         # Get matrix dimensions
         m, n = W_norm.getSize()
         
-        # Convert silenced_neurons to 32-bit ints and ensure it's a NumPy array
-        silenced_neurons_32 = np.asarray(silenced_neurons, dtype=np.int32)
+        # Convert silenced_W_idcs to 32-bit ints and ensure it's a NumPy array
+        silenced_W_idcs_32 = np.asarray(silenced_W_idcs, dtype=np.int32)
         
         # Create a scaling vector initialized with ones
         scale_vec = W_norm.createVecRight()
         scale_vec.set(1.0)
         
-        # Set silenced_neurons entries to zero in the scaling vector
-        scale_vec.setValues(silenced_neurons_32,
-                            np.zeros_like(silenced_neurons_32))
+        # Set silenced_W_idcs entries to zero in the scaling vector
+        scale_vec.setValues(silenced_W_idcs_32,
+                            np.zeros_like(silenced_W_idcs_32))
         scale_vec.assemble()
         
         # Scale the matrix columns
