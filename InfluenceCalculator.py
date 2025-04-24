@@ -11,7 +11,7 @@ NEG_NEUROTRANSMITTERS = {'glutamate', 'gaba', 'serotonin', 'octopamine'}
 
 
 class InfluenceCalculator:
-    def __init__(self, filename, signed=False):
+    def __init__(self, filename, signed=False, count_thresh=5):
         """
         Creates a class instance by loading SQL data with the given
         filename, establishing a neuron_id <-> W_id mapping (using bidict), and
@@ -19,11 +19,11 @@ class InfluenceCalculator:
         (signed if signed=True).
         """
         self.W_signed = signed
-        elist = self._load_sql_data(filename)
+        elist = self._load_sql_data(filename, count_thresh)
         self._create_neuron_W_id_mapping(elist)
         self._create_sparse_W(elist)
 
-    def _load_sql_data(self, filename):
+    def _load_sql_data(self, filename, count_thresh):
         """This method opens an SQLite database with the given filename,
         loads and stores metadata, and loads and returns a list of edges
         in the connectivity graph.
@@ -44,10 +44,10 @@ class InfluenceCalculator:
 
         # Construct the SQL query for the edgelist and add condition on minimum
         # synaptic count (here, min=5)
-        query = """
+        query = f"""
         SELECT *
         FROM edgelist_simple
-        WHERE count >= 5
+        WHERE count >= {count_thresh}
         """
 
         # Execute the query, collect the results, and close the db connection
