@@ -146,7 +146,7 @@ class InfluenceCalculator:
 
         return W_norm
 
-    def _solve_lin_system(self, W_norm, s):
+    def _solve_lin_system(W_norm, s):
         """Solves the system W_norm * x = s and returns x.
         """
         b = PETSc.Vec().createWithArray(s, comm=PETSc.COMM_SELF)
