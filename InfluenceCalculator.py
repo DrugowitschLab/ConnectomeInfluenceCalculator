@@ -76,6 +76,8 @@ class InfluenceCalculator:
     def _create_sparse_W(self, elist, syn_weight_measure='norm'):
         """This method takes the edge list, and uses it to populate the
         sparse connectivity matrix W.
+        syn_weight_measure takes either 'norm' for normalized postsynaptic 
+        weights or 'count' for unnormalized postsynaptic weights
         """
         # If W ought to be signed, change relevant edge list entries
         if self.W_signed:
