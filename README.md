@@ -1,2 +1,2 @@
 Download repository \
-Install with pip: "pip install ." 
+Install with "pip install ." 
