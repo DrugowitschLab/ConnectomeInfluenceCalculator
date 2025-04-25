@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "InfluenceCalculator"
+version = "0.1.0"
+description = "A tool to analyze the impact of neural signal propagation across the connectome of the fuit fly"
+authors = [
+    {name = "Zaki AJABI", email = "zaki_ajabi@hms.harvard.edu"},
+    {name = "Jan DRUGOWITSCH", email = "jan_drugowitsch@hms.harvard.edu"}
+]
+license = {text = "BSD 3-Clause"}
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "pandas",
+    "numpy",
+    "bidict",
+    "petsc4py",
+    "slepc4py"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator"

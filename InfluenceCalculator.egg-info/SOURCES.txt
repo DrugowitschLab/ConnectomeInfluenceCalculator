@@ -1,0 +1,11 @@
+LICENSE.txt
+README.md
+pyproject.toml
+InfluenceCalculator/InfluenceCalculator.py
+InfluenceCalculator/__init__.py
+InfluenceCalculator.egg-info/PKG-INFO
+InfluenceCalculator.egg-info/SOURCES.txt
+InfluenceCalculator.egg-info/dependency_links.txt
+InfluenceCalculator.egg-info/requires.txt
+InfluenceCalculator.egg-info/top_level.txt
+tests/test_InfluenceCalculator.py
