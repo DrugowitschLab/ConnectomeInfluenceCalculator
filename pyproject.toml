@@ -10,8 +10,8 @@ authors = [
     {name = "Zaki AJABI", email = "zaki_ajabi@hms.harvard.edu"},
     {name = "Jan DRUGOWITSCH", email = "jan_drugowitsch@hms.harvard.edu"}
 ]
-license = "BSD 3-Clause"
-readme = "README.md"
+license = "MIT"
+readme = "BSD-3-Clause"
 requires-python = ">=3.7"
 dependencies = [
     "pandas",
