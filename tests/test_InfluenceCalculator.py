@@ -12,7 +12,7 @@ if __name__ == "__main__":
     8. Save dataframe (per category)
     9. Loop over all seed catgories
     """
-    ic = InfluenceCalculator('banc_505_data.sqlite')
+    ic = InfluenceCalculator('toy_network_example.sqlite')
 
     # Define seed
     meta_column = 'seed_01'
