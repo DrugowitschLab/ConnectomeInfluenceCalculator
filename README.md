@@ -42,7 +42,7 @@ $$
 \end{equation}
 $$
 
-where $\lambda_{max}$ is the largest eigenvalue of \boldsymbol{W}. The steady-state solution can thus be written as:
+where $\lambda_{max}$ is the largest eigenvalue of $\boldsymbol{W}$. The steady-state solution can thus be written as:
 
 $$
 \begin{equation}
