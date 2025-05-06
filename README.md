@@ -23,10 +23,8 @@ before running the above `pip` commands. Please make sure that installed core li
 
 ## Usage
 
-We developed a method to compute the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
-$$
-x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-$$
+This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
+:math:x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}:math:
 
 ## Contributing
 
