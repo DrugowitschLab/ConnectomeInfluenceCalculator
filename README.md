@@ -32,7 +32,7 @@ $$
 \end{aligned}
 $$
 
-where $\boldsymbol{r}$ is the vector of neural activity, $\mathbf{W}$ is the connectivity matrix, and $\boldsymbol{s}$ is the stimulus signal (applied to the seed neurons and remains constant throughout the simulation). The connectivity matrix is constructed by mapping the neuron IDs to matrix indices and arranging them such that the columns correspond to presynaptic neurons and rows correspond to postsynaptic neurons. The matrix is then filled with the number of synaptic connections that a presynaptic neuron projects onto a postsynaptic neuron.
+where $\mathbf{x}$ is the vector of neural activity, $\mathbf{W}$ is the connectivity matrix, and $\boldsymbol{s}$ is the stimulus signal (applied to the seed neurons and remains constant throughout the simulation). The connectivity matrix is constructed by mapping the neuron IDs to matrix indices and arranging them such that the columns correspond to presynaptic neurons and rows correspond to postsynaptic neurons. The matrix is then filled with the number of synaptic connections that a presynaptic neuron projects onto a postsynaptic neuron.
 
 
 ## Contributing
