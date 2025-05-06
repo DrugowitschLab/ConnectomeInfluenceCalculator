@@ -21,6 +21,12 @@ export SLEPC_DIR = /path/to/SLEPc/installation
 ```
 before running the above `pip` commands. Please make sure that installed core libraries have the same version numbers as the Python wrappers that will be installed.
 
+Another alternative would be to install both libraries using Conda:
+```sh
+conda install -c conda-forge petsc petsc4py
+conda install -c conda-forge slepc slepc4py
+```
+
 ## Usage
 
 This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
