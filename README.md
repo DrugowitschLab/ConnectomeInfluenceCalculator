@@ -59,7 +59,7 @@ To run a test example, start by importing the InfluenceCalculator package:
 ```python
 from InfluenceCalculator import InfluenceCalculator
 ```
-Then instantiate a class object 'ic' using the filepath to the BANC dataset (should be 'sqlite' format):
+Then instantiate a class object 'ic' using the filepath to the BANC dataset (should be 'sqlite' file):
 ```python
 # Build InfluenceCalculator object
 ic = InfluenceCalculator('BANC_dataset.sqlite')
