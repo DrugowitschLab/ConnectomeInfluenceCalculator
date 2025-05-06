@@ -1,5 +1,3 @@
-\usepackage{bm} 
-
 # ConnectomeInfluenceCalculator
 
 ## Install
