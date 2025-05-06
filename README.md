@@ -72,15 +72,15 @@ Let us now, define the seed group as all 'olfactory' neurons and calculate the i
 meta_column = 'seed_01'
 seed_category = 'olfactory'
 
+# Get seed neuron ids
+seed_ids = ic.meta[ic.meta[meta_column] == seed_category].root_id 
+
 # Get neuron ids to inhibit (sensory neurons in this case)
 silenced_neurons = ic.meta[
     ic.meta['super_class'].isin(['sensory',
                                     'ascending_sensory'])].root_id
 
-# Get seed neuron ids
-seed_ids = ic.meta[ic.meta[meta_column] == seed_category].root_id 
-
-influence_df = None
+# Calculate influence scores and store them in a Pandas dataframe
 influence_df = ic.calculate_influence(seed_ids, silenced_neurons)
 ```
 
