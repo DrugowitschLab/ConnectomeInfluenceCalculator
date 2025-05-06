@@ -23,7 +23,11 @@ before running the above `pip` commands. Please make sure that installed core li
 
 ## Usage
 
-TODO
+We developed a method to compute the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
+\begin{align}
+    \tau \frac{d \boldsymbol{r}(t)}{dt} &= - \boldsymbol{r}(t) + \boldsymbol{W} \boldsymbol{r}(t) + \boldsymbol{s}(t) \\
+    &= \left( \boldsymbol{W} - \boldsymbol{I} \right)\boldsymbol{r}(t) + \boldsymbol{s}(t)
+\end{align}
 
 ## Contributing
 
