@@ -54,6 +54,39 @@ where $\boldsymbol{A} = \tilde{\boldsymbol{W}} - \boldsymbol{I}$. All matrix com
 
 The influence of any seed is defined as the magnitude of neural activity at steady state. We wrote a Python code that outputs a Pandas dataframe with neuron IDs and the associated degree of influence a chosen seed exerts on them. The code also allows users to silence specific neurons throughout the simulation by setting appropriate entries of the connectivity matrix to zero, effectively cutting all synaptic connections from these neurons. This helps analyze the impact of any neuron along any pathway between seed and target neurons.
 
+To run a test example, start by importing the InfluenceCalculator package:
+
+```python
+from InfluenceCalculator import InfluenceCalculator
+```
+Then instantiate a class object 'ic' using the filepath to the BANC dataset (should be 'sqlite' format):
+```python
+# Build InfluenceCalculator object
+ic = InfluenceCalculator('BANC_dataset.sqlite')
+```
+
+Let us now, define the seed group as all 'olfactory' neurons and calculate the influence of this seed on all downstream neurons while making sure to inhibit all non-seed sensory neurons:
+
+```python
+# Define seed category (depending on how neurons are labelled in metadata)
+meta_column = 'seed_01'
+seed_category = 'olfactory'
+
+# Get neuron ids to inhibit (sensory neurons in this case)
+silenced_neurons = ic.meta[
+    ic.meta['super_class'].isin(['sensory',
+                                    'ascending_sensory'])].root_id
+
+# Get seed neuron ids
+seed_ids = ic.meta[ic.meta[meta_column] == seed_category].root_id 
+
+influence_df = None
+influence_df = ic.calculate_influence(seed_ids, silenced_neurons)
+```
+
+Executing the previous script outputs a dataframe with a column of neurons IDs, a column of Boolean entries indicating whether the corresponding neuron is part of the seed group or not and, a column of influence scores relative to the seed neurons. Note that even though we selected all sensory neurons in the inhibition group, the 'calculate_influence' routine excludes the seed neurons from being inhibited if they intitially belonged to that group.
+
+
 ## Contributing
 
 TODO
