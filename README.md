@@ -25,9 +25,9 @@ before running the above `pip` commands. Please make sure that installed core li
 
 Another alternative would be to install both libraries using Conda. In this case, we highly recommend creating a virtual environment with a specific Python version:
 ```sh
-conda create -n ic-venv-1 python=3.13.1
+conda create -n ic-venv python=3.13.1
 ```
-The packages can then be installed by executing the following:
+After activation of the virtual environment, the packages can be installed by executing the following commands:
 ```sh
 conda install -c conda-forge petsc petsc4py
 conda install -c conda-forge slepc slepc4py
