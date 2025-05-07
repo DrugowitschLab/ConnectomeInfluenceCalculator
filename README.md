@@ -105,6 +105,3 @@ Executing the previous script outputs a dataframe with a column of neurons IDs, 
 
 TODO
 
-## Licence
-
-TODO
