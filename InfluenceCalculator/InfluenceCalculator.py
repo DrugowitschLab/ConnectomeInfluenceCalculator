@@ -37,7 +37,7 @@ class InfluenceCalculator:
         tables = cursor.fetchall()
 
         # Print the tables
-        print("Tables in the database:", tables)
+        # print("Tables in the database:", tables)
 
         # Get the meta data, cell types, etc.
         self.meta = pd.read_sql_query("SELECT * FROM meta", conn)
