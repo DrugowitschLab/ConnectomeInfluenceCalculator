@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 def test_run_multiple_seeds():
 
-    print("Initializing InfluenceCalculator object")
+    print("\nInitializing InfluenceCalculator object")
     ic = InfluenceCalculator('toy_network_example.sqlite')
     print("InfluenceCalculator object created")
 
