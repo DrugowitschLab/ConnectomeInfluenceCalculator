@@ -27,7 +27,7 @@ conda install -c conda-forge petsc petsc4py
 conda install -c conda-forge slepc slepc4py
 ```
 
-## Usage
+## Description
 
 This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
 
@@ -59,6 +59,8 @@ $$
 where $\boldsymbol{A} = \tilde{\boldsymbol{W}} - \boldsymbol{I}$. All matrix computations are performed using parallel computing libraries PETSc and SLEPc which adapt well to problems involving large, sparse matrices such as in our case and allow fast computation of the steady-state solution.
 
 The influence of any seed is defined as the magnitude of neural activity at steady state. We wrote a Python code that outputs a Pandas dataframe with neuron IDs and the associated degree of influence a chosen seed exerts on them. The code also allows users to silence specific neurons throughout the simulation by setting appropriate entries of the connectivity matrix to zero, effectively cutting all synaptic connections from these neurons. This helps analyze the impact of any neuron along any pathway between seed and target neurons.
+
+## Usage
 
 To run a test example, start by importing the InfluenceCalculator package:
 
