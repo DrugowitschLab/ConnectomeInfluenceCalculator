@@ -21,7 +21,7 @@ export SLEPC_DIR = /path/to/SLEPc/installation
 ```
 before running the above `pip` commands. Please make sure that installed core libraries have the same version numbers as the Python wrappers that will be installed.
 
-Another alternative would be to install both libraries using Conda. In this case, we highly recommend creating a virtual environment with the specific Python version:
+Another alternative would be to install both libraries using Conda. In this case, we highly recommend creating a virtual environment with a specific Python version:
 ```sh
 conda create -n ic-venv-1 python=3.13.1
 ```
