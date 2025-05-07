@@ -1,5 +1,7 @@
 # ConnectomeInfluenceCalculator
 
+This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation
+
 ## Install
 
 Download the repository, using either the [current main branch](https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/archive/refs/heads/main.zip) or one of the past versions. Then, either directly install the zipped version using
