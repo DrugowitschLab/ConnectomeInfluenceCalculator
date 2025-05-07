@@ -1,4 +1,4 @@
-Use pytest to run test_InfluenceCalculator.py:
+To run test_InfluenceCalculator.py, go to the "ConnectomeInfluenceCalculator" folder and execute the following command:
 ```sh
-pytest tests
+pytest -s tests
 ```
