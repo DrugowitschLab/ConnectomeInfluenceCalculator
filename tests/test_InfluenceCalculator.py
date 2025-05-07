@@ -21,7 +21,8 @@ def test_run_multiple_seeds():
                                      'ascending_sensory'])].root_id
     
     # Create the influence folder if it doesn't exist
-    os.makedirs("Influence", exist_ok=True)
+    folder_name = "Influence"
+    os.makedirs(folder_name, exist_ok=True)
 
     for seed_category in tqdm(seed_categories, desc="Calculating influence scores"):
         # Get seed neuron ids
@@ -31,10 +32,10 @@ def test_run_multiple_seeds():
         influence_df = ic.calculate_influence(seed_ids, silenced_neurons)
 
         # Save the DataFrame to a CSV file
-        influence_df.to_csv(f"Influence/{seed_category}_influence.csv",
+        influence_df.to_csv(f"{folder_name}/{seed_category}_influence.csv",
                             index=False)
         
-    print("Influence scores saved in: ", os.path.join(os.getcwd(), "Influence"))
+    print("Influence scores saved in: ", os.path.join(os.getcwd(), folder_name))
 
 
 if __name__ == "__main__":
