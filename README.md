@@ -110,5 +110,5 @@ Note that even though we selected all sensory neurons to be inhibited, the `calc
 
 
 ## Contributing
-For contributions and bug reports, please see the [contribution guidelines] (https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/blob/main/CONTRIBUTING.md).
+For contributions and bug reports, please see the [contribution guidelines](https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/blob/main/CONTRIBUTING.md).
 
