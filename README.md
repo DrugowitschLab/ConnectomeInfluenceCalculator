@@ -35,7 +35,7 @@ conda install -c conda-forge slepc slepc4py
 
 ## Description
 
-This code computes the influence scores of a neuron or a group of neurons, as specified through the seed vector $\boldsymbol{s}$ on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
+This code computes the influence scores of a neuron or a group of neurons, as specified through the seed vector $\boldsymbol{s}$, on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation: 
 
 $$
 \begin{aligned}
