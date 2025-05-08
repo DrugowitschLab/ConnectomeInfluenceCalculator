@@ -13,7 +13,7 @@ def test_run_multiple_seeds():
     # Define seed
     meta_column = 'seed_01'
     seed_categories = pd.unique(ic.meta[meta_column])
-    seed_categories = [element for element in seed_categories if element != '']
+    seed_categories = [element for element in seed_categories if element not in [None, '']]
 
     # Get neuron ids to inhibit (sensory neurons in this case)
     silenced_neurons = ic.meta[
