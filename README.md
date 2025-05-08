@@ -111,5 +111,12 @@ Note that even though we selected all sensory neurons to be inhibited, the `calc
 
 ## Contributing
 
-TODO
+We love to hear your input, and want to make contributing to this project as easy and transparent as possible, whether it's:
 
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
