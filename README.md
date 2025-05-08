@@ -85,10 +85,6 @@ By default, the programme simulates neural signal propagation based on an unsign
 # Build InfluenceCalculator object
 ic = InfluenceCalculator('BANC_dataset.sqlite', signed=True, count_thresh=5)
 ```
-```pyhton
-# Build InfluenceCalculator object
-ic = InfluenceCalculator('BANC_dataset.sqlite', signed=True, count_thresh=5)
-``` 
 
 Let us now, define the seed group as all 'olfactory' neurons and calculate the influence of this seed on all downstream neurons while making sure to inhibit all non-seed sensory neurons:
 
