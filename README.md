@@ -82,7 +82,8 @@ ic = InfluenceCalculator('BANC_dataset.sqlite')
 
 By default, the programme simulates neural signal propagation based on an unsigned version of the connectivity matrix. However, it is possible to use a signed version whereby synaptic weights of inhibitory neurons are assigned negative values. Moreover, users can specify a minimum threshold count for the number of postsynaptic connections that will be considered in the analysis (default is `5`). To do so, run the following command, instead:
 ```python
-# acjn
+# Build InfluenceCalculator object
+ic = InfluenceCalculator('BANC_dataset.sqlite', signed=True, count_thresh=5)
 ```
 ```pyhton
 # Build InfluenceCalculator object
