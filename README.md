@@ -120,3 +120,26 @@ We love to hear your input, and want to make contributing to this project as eas
 - Becoming a maintainer
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+
+## We Develop with Github
+
+We use Github to host code, to track [issues and feature requests](https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/issues), as well as accept [pull requests](https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/pulls). 
+
+## Any contributions you make will be under the New BSD License
+
+In short, when you submit code changes, your submissions are understood to be under the same [New BSD License](https://choosealicense.com/licenses/bsd-3-clause/) that covers the project. Feel free to contact the maintainers if that's a concern.
+
+## Report bugs using Github's [issues](https://github.com/DrugowitschLab/VBLinLogit/issues)
+
+We use GitHub issues to track public bugs. Report a bug by opening a new issue; it's that easy!
+
+If you file a bug report, please make sure to include
+
+- A quick summary and/or background
+- Steps to reproduce
+  - Be specific!
+  - Give minimal working example code that reproduces the bug, if you can.
+- What you expected would happen
+- What actually happens
+- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
+
