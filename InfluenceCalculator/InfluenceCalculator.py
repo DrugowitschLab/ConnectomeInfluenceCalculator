@@ -134,8 +134,9 @@ class InfluenceCalculator:
         eig_val_largest = eps.getEigenvalue(0).real
 
         # Create W = alpha * W - I
-        alpha = 0.99 / eig_val_largest
-        W_norm.scale(alpha)
+        if eig_val_largest > 0.99:
+            alpha = 0.99 / eig_val_largest
+            W_norm.scale(alpha)
         W_norm.shift(-1.0)
 
     @staticmethod
