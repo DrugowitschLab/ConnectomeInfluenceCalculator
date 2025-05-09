@@ -27,7 +27,7 @@ Alteratively, both libraries and their Python wrappers can be installed using `c
 ```sh
 conda create -n ic-venv python=3.13.1
 ```
-After activation of the virtual environment, the packages can be installed by executing the following commands:
+After activation of the virtual environment `ic-venv`, the packages can be installed by executing the following commands:
 ```sh
 conda install -c conda-forge petsc petsc4py
 conda install -c conda-forge slepc slepc4py
