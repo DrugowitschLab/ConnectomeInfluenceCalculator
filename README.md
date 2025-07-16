@@ -1,5 +1,7 @@
 # ConnectomeInfluenceCalculator
 
+[![DOI](https://zenodo.org/badge/964174582.svg)](https://doi.org/10.5281/zenodo.15999929)
+
 This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation.
 
 ## Install
