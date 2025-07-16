@@ -19,8 +19,10 @@
 
     "license": "BSD 3-Clause License",
 
-    "title": "Connectome Influence Calculator",
+    "title": "v0.2",
 
-    "keywords": ["Connectome", "Drosophila", "Dynamics", "Model", "RNN"],
+    "note": "Code version used to compute influence scores for the Brain and Nerve Cord (BANC) connectome reported in the Bates et al. pre-print",
+
+    "keywords": ["Connectome", "Drosophila", "Dynamics", "Model", "RNN"]
     
 }
