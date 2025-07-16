@@ -1,0 +1,28 @@
+{
+    "creators": [
+        {
+            "orcid": "0000-0002-4411-4005",
+            "affiliation": "Department of Neurobiology, Harvard Medical School, Boston, MA 02115, USA",
+            "name": "Ajabi, Zaki"
+        },
+        {
+            "orcid": "0000-0002-1195-0445",
+            "affiliation": "Department of Neurobiology, Harvard Medical School, Boston, MA 02115, USA",
+            "name": "Bates, Alexander S."
+        },
+        {
+            "orcid": "0000-0002-7846-0408",
+            "affiliation": "Department of Neurobiology, Harvard Medical School, Boston, MA 02115, USA",
+            "name": "Drugowitsch, Jan"
+        }
+    ],
+
+    "license": "BSD 3-Clause License",
+
+    "title": "Connectome Influence Calculator",
+
+    "keywords": ["Connectome", "Drosophila", "Dynamics", "model", "RNN"],
+
+    "version": "0.2"
+    
+}
