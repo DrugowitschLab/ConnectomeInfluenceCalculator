@@ -83,9 +83,9 @@ class InfluenceCalculator:
         if self.W_signed:
             # Create a boolean mask for rows in meta that meet our conditions
             mask = (self.meta['top_nt'].isin(NEG_NEUROTRANSMITTERS) &
-                    self.meta['id'].isin(elist['pre']))
+                    self.meta['root_id'].isin(elist['pre']))
             # Get the ids that need to be updated
-            ids_to_update = set(self.meta.loc[mask, 'id'])
+            ids_to_update = set(self.meta.loc[mask, 'root_id'])
             # Update elist in one vectorized operation
             elist.loc[elist['pre'].isin(ids_to_update), 'count'] *= -1
 
