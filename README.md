@@ -69,6 +69,9 @@ All matrix computations are performed using parallel computing libraries PETSc a
 The influence of any seed is defined as the magnitude of neural activity at steady state, $\boldsymbol{r}_{\infty}$.
 Our Python code supports creating a Pandas dataframe with neuron IDs and the associated degree of influence a chosen seed exerts on them. The code also allows users to silence specific neurons throughout the simulation by setting appropriate entries of the connectivity matrix to zero, effectively cutting all synaptic connections from these neurons. This helps analyze the impact of any neuron along any pathway between seed and target neurons.
 
+## BANC Dataset
+The BANC dataset is available for download at https://doi.org/10.7910/DVN/8TFGGB
+
 ## Usage
 
 To run a test example, start by importing the InfluenceCalculator package:
