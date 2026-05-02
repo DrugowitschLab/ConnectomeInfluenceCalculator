@@ -1,0 +1,301 @@
+root_id,top_nt,super_class,neuron_class,body_part
+ADAL,glutamate,interneuron,layer 3 interneuron,head
+ADAR,glutamate,interneuron,layer 3 interneuron,head
+ADEL,dopamine,sensory,SN3,body
+ADER,dopamine,sensory,SN3,body
+ADFL,serotonin,sensory,SN6,head
+ADFR,serotonin,sensory,SN6,head
+ADLL,,sensory,SN5,head
+ADLR,,sensory,SN5,head
+AFDL,glutamate,sensory,SN6,head
+AFDR,glutamate,sensory,SN6,head
+AIAL,acetylcholine,interneuron,layer 3 interneuron,head
+AIAR,acetylcholine,interneuron,layer 3 interneuron,head
+AIBL,glutamate,interneuron,layer 2 interneuron,head
+AIBR,,interneuron,layer 2 interneuron,head
+AIML,glutamate,interneuron,category 4 interneuron,head
+AIMR,glutamate,interneuron,category 4 interneuron,head
+AINL,acetylcholine,interneuron,category 4 interneuron,head
+AINR,acetylcholine,interneuron,category 4 interneuron,head
+AIYL,acetylcholine,interneuron,layer 3 interneuron,head
+AIYR,acetylcholine,interneuron,layer 3 interneuron,head
+AIZL,glutamate,interneuron,layer 3 interneuron,head
+AIZR,glutamate,interneuron,layer 3 interneuron,head
+ALA,,interneuron,layer 3 interneuron,body
+ALML,glutamate,sensory,SN3,body
+ALMR,glutamate,sensory,SN3,body
+ALNL,acetylcholine,sensory,SN4,body
+ALNR,acetylcholine,sensory,SN4,body
+AQR,glutamate,sensory,SN4,body
+AS01,,motor,ventral cord motor neuron,body
+AS02,,motor,ventral cord motor neuron,body
+AS03,,motor,ventral cord motor neuron,body
+AS04,,motor,ventral cord motor neuron,body
+AS05,,motor,ventral cord motor neuron,body
+AS06,,motor,ventral cord motor neuron,body
+AS07,,motor,ventral cord motor neuron,body
+AS08,,motor,ventral cord motor neuron,body
+AS09,,motor,ventral cord motor neuron,body
+AS10,acetylcholine,motor,ventral cord motor neuron,body
+AS11,acetylcholine,motor,ventral cord motor neuron,body
+ASEL,glutamate,sensory,SN6,head
+ASER,glutamate,sensory,SN6,head
+ASGL,glutamate,sensory,SN6,head
+ASGR,glutamate,sensory,SN6,head
+ASHL,glutamate,sensory,SN5,head
+ASHR,glutamate,sensory,SN5,head
+ASIL,,sensory,SN6,head
+ASIR,,sensory,SN6,head
+ASJL,,sensory,SN6,head
+ASJR,,sensory,SN6,head
+ASKL,glutamate,sensory,SN6,head
+ASKR,glutamate,sensory,SN6,head
+AUAL,glutamate,interneuron,layer 3 interneuron,head
+AUAR,glutamate,interneuron,layer 3 interneuron,head
+AVAL,,interneuron,layer 1 interneuron,head
+AVAR,,interneuron,layer 1 interneuron,head
+AVBL,,interneuron,layer 1 interneuron,head
+AVBR,,interneuron,layer 1 interneuron,head
+AVDL,,interneuron,layer 2 interneuron,head
+AVDR,,interneuron,layer 2 interneuron,head
+AVEL,,interneuron,layer 1 interneuron,head
+AVER,,interneuron,layer 1 interneuron,head
+AVFL,,interneuron,layer 3 interneuron,head
+AVFR,,interneuron,layer 3 interneuron,head
+AVG,,interneuron,layer 3 interneuron,body
+AVHL,,interneuron,layer 3 interneuron,head
+AVHR,,interneuron,layer 3 interneuron,head
+AVJL,,interneuron,layer 2 interneuron,head
+AVJR,,interneuron,layer 2 interneuron,head
+AVKL,,interneuron,layer 2 interneuron,head
+AVKR,,interneuron,layer 2 interneuron,head
+AVL,gaba,interneuron,layer 2 interneuron,head
+AVM,glutamate,sensory,SN3,body
+AWAL,,sensory,SN6,head
+AWAR,,sensory,SN6,head
+AWBL,,sensory,SN6,head
+AWBR,,sensory,SN6,head
+AWCL,glutamate,sensory,SN6,head
+AWCR,glutamate,sensory,SN6,head
+BAGL,glutamate,sensory,SN4,head
+BAGR,glutamate,sensory,SN4,head
+BDUL,,interneuron,layer 3 interneuron,body
+BDUR,,interneuron,layer 3 interneuron,body
+CEPDL,dopamine,sensory,SN1,head
+CEPDR,dopamine,sensory,SN1,head
+CEPVL,dopamine,sensory,SN1,head
+CEPVR,dopamine,sensory,SN1,head
+DA01,,motor,ventral cord motor neuron,body
+DA02,,motor,ventral cord motor neuron,body
+DA03,,motor,ventral cord motor neuron,body
+DA04,,motor,ventral cord motor neuron,body
+DA05,,motor,ventral cord motor neuron,body
+DA06,,motor,ventral cord motor neuron,body
+DA07,,motor,ventral cord motor neuron,body
+DA08,,motor,ventral cord motor neuron,body
+DA09,,motor,ventral cord motor neuron,body
+DB01,,motor,ventral cord motor neuron,body
+DB02,,motor,ventral cord motor neuron,body
+DB03,,motor,ventral cord motor neuron,body
+DB04,,motor,ventral cord motor neuron,body
+DB05,,motor,ventral cord motor neuron,body
+DB06,,motor,ventral cord motor neuron,body
+DB07,,motor,ventral cord motor neuron,body
+DD01,,motor,ventral cord motor neuron,body
+DD02,,motor,ventral cord motor neuron,body
+DD03,,motor,ventral cord motor neuron,body
+DD04,,motor,ventral cord motor neuron,body
+DD05,,motor,ventral cord motor neuron,body
+DD06,,motor,ventral cord motor neuron,body
+DVA,acetylcholine,sensory,SN3,body
+DVB,gaba,interneuron,layer 3 interneuron,tail
+DVC,glutamate,interneuron,layer 2 interneuron,head
+FLPL,glutamate,sensory,SN3,body
+FLPR,glutamate,sensory,SN3,body
+I1R,acetylcholine,interneuron,pharynx neuron,pharynx
+I2L,glutamate,interneuron,pharynx neuron,pharynx
+I2R,,interneuron,pharynx neuron,pharynx
+I3,,interneuron,pharynx neuron,pharynx
+I4,,interneuron,pharynx neuron,pharynx
+I5,glutamate,interneuron,pharynx neuron,pharynx
+I6,acetylcholine,interneuron,pharynx neuron,pharynx
+IL1DL,glutamate,sensory,SN1,head
+IL1DR,glutamate,sensory,SN1,head
+IL1L,glutamate,sensory,SN1,head
+IL1R,glutamate,sensory,SN1,head
+IL1VL,glutamate,sensory,SN1,head
+IL1VR,glutamate,sensory,SN1,head
+IL2DL,acetylcholine,sensory,SN1,head
+IL2DR,acetylcholine,sensory,SN1,head
+IL2L,acetylcholine,sensory,SN1,head
+IL2R,acetylcholine,sensory,SN1,head
+IL2VL,acetylcholine,sensory,SN1,head
+IL2VR,acetylcholine,sensory,SN1,head
+LUAL,glutamate,interneuron,layer 3 interneuron,tail
+LUAR,glutamate,interneuron,layer 3 interneuron,tail
+M1,acetylcholine,motor,pharynx neuron,pharynx
+M2L,acetylcholine,motor,pharynx neuron,pharynx
+M2R,acetylcholine,motor,pharynx neuron,pharynx
+M3L,glutamate,motor,pharynx neuron,pharynx
+M3R,glutamate,motor,pharynx neuron,pharynx
+M4,acetylcholine,motor,pharynx neuron,pharynx
+M5,acetylcholine,motor,pharynx neuron,pharynx
+MCL,acetylcholine,motor,pharynx neuron,pharynx
+MCR,acetylcholine,motor,pharynx neuron,pharynx
+MI,glutamate,motor,pharynx neuron,pharynx
+NSML,serotonin,interneuron,pharynx neuron,pharynx
+NSMR,serotonin,interneuron,pharynx neuron,pharynx
+OLLL,glutamate,sensory,SN1,head
+OLLR,glutamate,sensory,SN1,head
+OLQDL,glutamate,sensory,SN1,head
+OLQDR,glutamate,sensory,SN1,head
+OLQVL,glutamate,sensory,SN1,head
+OLQVR,glutamate,sensory,SN1,head
+PDA,acetylcholine,motor,ventral cord motor neuron,body
+PDB,,motor,ventral cord motor neuron,body
+PDEL,dopamine,sensory,SN3,body
+PDER,dopamine,sensory,SN3,body
+PHAL,glutamate,sensory,SN2,tail
+PHAR,glutamate,sensory,SN2,tail
+PHBL,glutamate,sensory,SN2,tail
+PHBR,glutamate,sensory,SN2,tail
+PHCL,glutamate,sensory,SN2,tail
+PHCR,glutamate,sensory,SN2,tail
+PLML,glutamate,sensory,SN3,body
+PLMR,glutamate,sensory,SN3,body
+PLNL,acetylcholine,sensory,SN4,body
+PLNR,acetylcholine,sensory,SN4,body
+PQR,glutamate,sensory,SN4,body
+PVCL,acetylcholine,interneuron,layer 1 interneuron,head
+PVCR,acetylcholine,interneuron,layer 1 interneuron,head
+PVDL,glutamate,sensory,SN3,body
+PVDR,glutamate,sensory,SN3,body
+PVM,,sensory,SN3,body
+PVNL,,interneuron,layer 3 interneuron,tail
+PVNR,,interneuron,layer 3 interneuron,tail
+PVPL,acetylcholine,interneuron,layer 3 interneuron,tail
+PVPR,acetylcholine,interneuron,layer 3 interneuron,tail
+PVQL,glutamate,interneuron,layer 3 interneuron,tail
+PVQR,glutamate,interneuron,layer 3 interneuron,tail
+PVR,glutamate,interneuron,layer 3 interneuron,tail
+PVT,,interneuron,layer 2 interneuron,head
+PVWL,acetylcholine,interneuron,layer 2 interneuron,head
+PVWR,acetylcholine,interneuron,layer 2 interneuron,head
+RIAL,glutamate,interneuron,layer 1 interneuron,head
+RIAR,glutamate,interneuron,layer 1 interneuron,head
+RIBL,,interneuron,layer 2 interneuron,head
+RIBR,,interneuron,layer 2 interneuron,head
+RICL,octopamine,interneuron,layer 2 interneuron,head
+RICR,octopamine,interneuron,layer 2 interneuron,head
+RID,,interneuron,layer 1 interneuron,head
+RIFL,,interneuron,layer 3 interneuron,head
+RIFR,,interneuron,layer 3 interneuron,head
+RIGL,glutamate,interneuron,layer 2 interneuron,head
+RIGR,glutamate,interneuron,layer 2 interneuron,head
+RIH,serotonin,interneuron,category 4 interneuron,head
+RIML,acetylcholine,interneuron,layer 1 interneuron,head
+RIMR,acetylcholine,interneuron,layer 1 interneuron,head
+RIPL,,interneuron,linker to pharynx,pharynx
+RIPR,,interneuron,linker to pharynx,pharynx
+RIR,,interneuron,category 4 interneuron,head
+RIS,gaba,interneuron,layer 3 interneuron,head
+RIVL,,motor,head motor neuron,head
+RIVR,,motor,head motor neuron,head
+RMDDL,acetylcholine,motor,head motor neuron,head
+RMDDR,acetylcholine,motor,head motor neuron,head
+RMDL,acetylcholine,motor,head motor neuron,head
+RMDR,acetylcholine,motor,head motor neuron,head
+RMDVL,acetylcholine,motor,head motor neuron,head
+RMDVR,acetylcholine,motor,head motor neuron,head
+RMED,gaba,motor,head motor neuron,head
+RMEL,gaba,motor,head motor neuron,head
+RMER,gaba,motor,head motor neuron,head
+RMEV,gaba,motor,head motor neuron,head
+RMFL,,interneuron,layer 2 interneuron,head
+RMFR,,interneuron,layer 2 interneuron,head
+RMGL,,interneuron,layer 2 interneuron,head
+RMGR,,interneuron,layer 2 interneuron,head
+RMHL,,motor,head motor neuron,head
+RMHR,,motor,head motor neuron,head
+SAADL,acetylcholine,interneuron,layer 2 interneuron,head
+SAADR,acetylcholine,interneuron,layer 2 interneuron,head
+SAAVL,acetylcholine,interneuron,layer 2 interneuron,head
+SAAVR,acetylcholine,interneuron,layer 2 interneuron,head
+SABD,acetylcholine,motor,sublateral motor neuron,body
+SABVL,acetylcholine,motor,sublateral motor neuron,body
+SABVR,acetylcholine,motor,sublateral motor neuron,body
+SDQL,acetylcholine,sensory,SN4,body
+SDQR,acetylcholine,sensory,SN4,body
+SIADL,acetylcholine,motor,sublateral motor neuron,body
+SIADR,acetylcholine,motor,sublateral motor neuron,body
+SIAVL,acetylcholine,motor,sublateral motor neuron,body
+SIAVR,acetylcholine,motor,sublateral motor neuron,body
+SIBDL,acetylcholine,motor,sublateral motor neuron,body
+SIBDR,acetylcholine,motor,sublateral motor neuron,body
+SIBVL,acetylcholine,motor,sublateral motor neuron,body
+SIBVR,acetylcholine,motor,sublateral motor neuron,body
+SMBDL,acetylcholine,motor,sublateral motor neuron,body
+SMBDR,acetylcholine,motor,sublateral motor neuron,body
+SMBVL,acetylcholine,motor,sublateral motor neuron,body
+SMBVR,acetylcholine,motor,sublateral motor neuron,body
+SMDDL,acetylcholine,motor,sublateral motor neuron,body
+SMDDR,acetylcholine,motor,sublateral motor neuron,body
+SMDVL,acetylcholine,motor,sublateral motor neuron,body
+SMDVR,acetylcholine,motor,sublateral motor neuron,body
+URADL,acetylcholine,motor,head motor neuron,head
+URADR,acetylcholine,motor,head motor neuron,head
+URAVL,acetylcholine,motor,head motor neuron,head
+URAVR,acetylcholine,motor,head motor neuron,head
+URBL,acetylcholine,interneuron,category 4 interneuron,head
+URBR,acetylcholine,interneuron,category 4 interneuron,head
+URXL,,sensory,SN4,head
+URXR,,sensory,SN4,head
+URYDL,glutamate,sensory,SN1,head
+URYDR,glutamate,sensory,SN1,head
+URYVL,glutamate,sensory,SN1,head
+URYVR,glutamate,sensory,SN1,head
+VA01,,motor,ventral cord motor neuron,body
+VA02,,motor,ventral cord motor neuron,body
+VA03,,motor,ventral cord motor neuron,body
+VA04,,motor,ventral cord motor neuron,body
+VA05,,motor,ventral cord motor neuron,body
+VA06,,motor,ventral cord motor neuron,body
+VA07,,motor,ventral cord motor neuron,body
+VA08,,motor,ventral cord motor neuron,body
+VA09,,motor,ventral cord motor neuron,body
+VA10,acetylcholine,motor,ventral cord motor neuron,body
+VA11,acetylcholine,motor,ventral cord motor neuron,body
+VA12,acetylcholine,motor,ventral cord motor neuron,body
+VB01,,motor,ventral cord motor neuron,body
+VB02,,motor,ventral cord motor neuron,body
+VB03,,motor,ventral cord motor neuron,body
+VB04,,motor,ventral cord motor neuron,body
+VB05,,motor,ventral cord motor neuron,body
+VB06,,motor,ventral cord motor neuron,body
+VB07,,motor,ventral cord motor neuron,body
+VB08,,motor,ventral cord motor neuron,body
+VB09,,motor,ventral cord motor neuron,body
+VB10,acetylcholine,motor,ventral cord motor neuron,body
+VB11,acetylcholine,motor,ventral cord motor neuron,body
+VD01,,motor,ventral cord motor neuron,body
+VD02,,motor,ventral cord motor neuron,body
+VD03,,motor,ventral cord motor neuron,body
+VD04,,motor,ventral cord motor neuron,body
+VD05,,motor,ventral cord motor neuron,body
+VD06,,motor,ventral cord motor neuron,body
+VD07,,motor,ventral cord motor neuron,body
+VD08,,motor,ventral cord motor neuron,body
+VD09,,motor,ventral cord motor neuron,body
+VD10,gaba,motor,ventral cord motor neuron,body
+VD11,gaba,motor,ventral cord motor neuron,body
+VD12,gaba,motor,ventral cord motor neuron,body
+VD13,gaba,motor,ventral cord motor neuron,body
+bm,,modulatory,pharynx neuron,pharynx
+e3D,,modulatory,pharynx neuron,pharynx
+e3VL,,modulatory,pharynx neuron,pharynx
+e3VR,,modulatory,pharynx neuron,pharynx
+g1AL,,modulatory,pharynx neuron,pharynx
+g1AR,,modulatory,pharynx neuron,pharynx
+g2L,,modulatory,pharynx neuron,pharynx
+g2R,,modulatory,pharynx neuron,pharynx
+pm1,,modulatory,pharynx neuron,pharynx
