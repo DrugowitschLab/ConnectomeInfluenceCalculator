@@ -1,18 +1,18 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "InfluenceCalculator"
-version = "0.1.0"
-description = "A tool to analyze the impact of neural signal propagation across the connectome of the fuit fly"
+version = "0.2.0"
+description = "Compute neural influence scores on connectome graphs (Drosophila, C. elegans, ...)"
 authors = [
     {name = "Zaki AJABI", email = "zaki_ajabi@hms.harvard.edu"},
     {name = "Jan DRUGOWITSCH", email = "jan_drugowitsch@hms.harvard.edu"}
 ]
 license = "BSD-3-Clause"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 dependencies = [
     "pandas",
     "numpy",
@@ -21,5 +21,23 @@ dependencies = [
     "slepc4py"
 ]
 
+[project.optional-dependencies]
+parquet  = ["pyarrow"]
+examples = ["matplotlib", "seaborn", "tqdm"]
+test     = ["pytest", "tqdm", "pyarrow"]
+dev      = ["pytest", "tqdm", "pyarrow", "matplotlib", "seaborn", "ruff"]
+
 [project.urls]
-"Homepage" = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator"
+Homepage      = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator"
+Repository    = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator"
+Issues        = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator/issues"
+Documentation = "https://github.com/DrugowitschLab/ConnectomeInfluenceCalculator#readme"
+
+[tool.setuptools.packages.find]
+include = ["InfluenceCalculator*"]
+
+[tool.setuptools.package-data]
+InfluenceCalculator = ["data/*.csv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
