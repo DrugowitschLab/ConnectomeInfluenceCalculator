@@ -48,8 +48,8 @@ class InfluenceCalculator:
 
         lambda_max is the target largest real eigenvalue of the rescaled
         W after normalisation; W is scaled in place by
-        lambda_max / lambda_max(W) so that lambda_max of the rescaled W
-        equals lambda_max exactly. Must satisfy 0 < lambda_max < 1 for
+        lambda_max / max(eigenvalue(W)) so that lambda_max of the rescaled 
+        W equals lambda_max exactly. Must satisfy 0 < lambda_max < 1 for
         the steady-state solve to remain stable. The amplification of the
         leading eigenmode in (I - W_rescaled)^-1 is 1 / (1 - lambda_max),
         so the default 0.99 gives ~100x and a smaller value
