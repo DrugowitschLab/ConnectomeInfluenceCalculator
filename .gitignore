@@ -2,3 +2,7 @@
 dist/
 build/
 .DS_Store
+__pycache__/
+.pytest_cache/
+.venv/
+Influence/
