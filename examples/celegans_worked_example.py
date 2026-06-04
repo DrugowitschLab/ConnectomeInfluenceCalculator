@@ -32,7 +32,7 @@ import seaborn as sns
 from scipy.cluster.hierarchy import linkage, leaves_list
 from tqdm import tqdm
 
-from InfluenceCalculator import InfluenceCalculator, adjust_influence
+from InfluenceCalculator import InfluenceCalculator
 from InfluenceCalculator.data import celegans_edgelist, celegans_meta
 
 
@@ -290,7 +290,7 @@ def main():
         per_pair = per_pair[per_pair > 0]
         const = float(-np.log(per_pair.min()))
 
-        adjusted = adjust_influence(sub_raw, const=const)
+        adjusted = InfluenceCalculator.adjust_influence(sub_raw, const=const)
         matrix = adjusted.pivot_table(index='target', columns='seed',
                                       values='adjusted_influence')
 

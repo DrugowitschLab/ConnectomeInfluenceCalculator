@@ -155,7 +155,7 @@ Executing this returns a DataFrame with the neuron IDs, a Boolean `is_seed` colu
 
 ## `adjust_influence`: log-compression and grouping
 
-Raw influence scores from `calculate_influence` span many orders of magnitude — the leading eigenmode of `(I - W̃)⁻¹` is amplified by `1 / (1 - lambda_max)` (≈ 100× at the default `lambda_max=0.99`), and weakly connected nodes pick up vanishingly small values that crowd the lower tail. `adjust_influence` makes the output legible by taking the natural log and shifting it so the smallest meaningful score sits at zero. It runs by default at the end of `calculate_influence` (so the returned DataFrame already carries adjusted columns) and is also exposed as a standalone module-level function for advanced workflows that aggregate raw influence across multiple seed runs before re-adjusting.
+Raw influence scores from `calculate_influence` span many orders of magnitude — the leading eigenmode of `(I - W̃)⁻¹` is amplified by `1 / (1 - lambda_max)` (≈ 100× at the default `lambda_max=0.99`), and weakly connected nodes pick up vanishingly small values that crowd the lower tail. `adjust_influence` makes the output legible by taking the natural log and shifting it so the smallest meaningful score sits at zero. It runs by default at the end of `calculate_influence` (so the returned DataFrame already carries adjusted columns) and is also exposed as a `@staticmethod` on `InfluenceCalculator` (`InfluenceCalculator.adjust_influence(df, const=...)`) for advanced workflows that aggregate raw influence across multiple seed runs before re-adjusting.
 
 ```
 adjusted_influence = log(raw_influence) + const
@@ -173,7 +173,7 @@ results = ic.calculate_influence(seed_neurons)
 raw_col = 'Influence_score_(unsigned)'  # or 'Influence_score_(signed)'
 min_nonzero = results.loc[results[raw_col] > 0, raw_col].min()
 const = -np.log(min_nonzero)
-adjusted = adjust_influence(results, const=const)
+adjusted = InfluenceCalculator.adjust_influence(results, const=const)
 ```
 
 For the bundled C. elegans dataset (300 neurons) this gives `const ≈ 11–15`, depending on `lambda_max` and the transmitter filtering.
