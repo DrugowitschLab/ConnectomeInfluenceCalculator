@@ -1,8 +1,10 @@
 # ConnectomeInfluenceCalculator
 
+[![Nature (open access)](https://img.shields.io/badge/Nature-10.1038%2Fs41586--026--10735--w-006400)](https://doi.org/10.1038/s41586-026-10735-w)
+[![bioRxiv](https://img.shields.io/badge/bioRxiv-2025.07.31.667571v3-bd2c00)](https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3)
 [![DOI](https://zenodo.org/badge/964174582.svg)](https://zenodo.org/badge/latestdoi/964174582)
 
-This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation.
+This code computes the influence scores of a neuron or a group of neurons (seed) on all downstream neurons in the connectome based on a linear dynamical model of neural signal propagation. The algorithm is introduced and applied to the whole-CNS *Drosophila* BANC connectome in the [BANC paper](https://doi.org/10.1038/s41586-026-10735-w) (Bates, Phelps, Kim, Yang et al., *Nature* 2026 — open access).
 
 ## Install
 
@@ -230,21 +232,25 @@ Influence from every sensory neuron (n = 83 → 46 cell classes after collapsing
 
 ## Citation
 
-If you use the influence scores produced by this library in published work, please cite Bates, Phelps, Kim, Yang et al. (2025), where the algorithm is applied across the BANC whole-CNS *Drosophila* connectome:
+If you use the influence scores produced by this library in published work, please cite Bates, Phelps, Kim, Yang et al. (2026), where the algorithm is introduced and applied across the BANC whole-CNS *Drosophila* connectome:
 
-> Bates AS, Phelps JS, Kim M, Yang HH, *et al.* **Distributed control circuits across a brain-and-cord connectome.** *bioRxiv* (2025). doi:[10.1101/2025.07.31.667571](https://doi.org/10.1101/2025.07.31.667571). PMID:[40766407](https://pubmed.ncbi.nlm.nih.gov/40766407/).
+> Bates AS, Phelps JS, Kim M, Yang HH, Matsliah A, Ajabi Z, Perlman E, *et al.* (2026).
+> *Distributed control circuits across a brain-and-cord connectome.*
+> **Nature** (open access). <https://doi.org/10.1038/s41586-026-10735-w>.
+> Preprint: bioRxiv 2025.07.31.667571 (v3), <https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3>.
+> PMID:[40766407](https://pubmed.ncbi.nlm.nih.gov/40766407/).
 
 ```bibtex
-@article{bates2025distributed,
+@article{bates2026distributed,
   title   = {Distributed control circuits across a brain-and-cord connectome},
   author  = {Bates, Alexander Shakeel and Phelps, J. S. and Kim, M.
              and Yang, H. H. and Matsliah, A. and others
              and {BANC-FlyWire Consortium}},
-  journal = {bioRxiv},
-  year    = {2025},
-  doi     = {10.1101/2025.07.31.667571},
-  url     = {https://doi.org/10.1101/2025.07.31.667571},
-  note    = {Preprint. PMID: 40766407; PMCID: PMC12324551}
+  journal = {Nature},
+  year    = {2026},
+  doi     = {10.1038/s41586-026-10735-w},
+  url     = {https://doi.org/10.1038/s41586-026-10735-w},
+  note    = {Open access. Preprint v3: https://www.biorxiv.org/content/10.1101/2025.07.31.667571v3 (PMID: 40766407; PMCID: PMC12324551)}
 }
 ```
 
