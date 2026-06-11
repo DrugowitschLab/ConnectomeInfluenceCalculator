@@ -317,10 +317,175 @@ class InfluenceCalculator:
 
         return influence_df
 
-    def calculate_influence(self, seed_ids, silenced_neurons=[]):
+    @staticmethod
+    def adjust_influence(influence_df, const=24, signif=6):
+        """Returns a copy of an influence DataFrame with three log-compressed
+        columns appended: adjusted_influence,
+        adjusted_influence_norm_by_targets, and
+        adjusted_influence_norm_by_sources_and_targets.
+
+        Raw influence scores span many orders of magnitude (the strongest
+        direct paths can be ten billion times larger than the weakest distal
+        trickle), so a linear-scaled visualisation shows the top of the
+        distribution and nothing else.  This function does three things to
+        make the output legible:
+
+          - log(max(|x|, exp(-const))) compresses the dynamic range and
+            applies a junk-node floor so that anything weaker than
+            exp(-const) is treated as essentially zero (which keeps log(0)
+            from producing -inf and stops a colormap getting hijacked by
+            numerical noise);
+          - + const shifts everything so the smallest meaningful magnitude
+            sits at exactly 0;
+          - sign is preserved so signed-mode input produces signed output.
+
+        If the input has 'target' and 'seed' columns, raw scores are
+        grouped and summed per (target, seed) before the log transform so
+        that calls aggregating multiple seeds into a single influence
+        profile (e.g. the per-cell-class collapse used in the worked
+        example) Just Work.  Otherwise each row is treated as its own
+        (target, seed) group and the function reduces to per-row log
+        compression.  In either case the per-seed-group n_sources and
+        n_targets used by the two normalised columns are recovered from
+        is_seed and the row count.
+        """
+        df = influence_df.copy()
+        added_cols = []
+
+        # Resolve which column holds the raw influence score
+        has_orig = 'influence_original' in df.columns
+        has_unsigned = 'Influence_score_(unsigned)' in df.columns
+        has_signed = 'Influence_score_(signed)' in df.columns
+
+        if not has_orig:
+            if has_unsigned and has_signed:
+                raise ValueError(
+                    "DataFrame contains both 'Influence_score_(unsigned)' "
+                    "and 'Influence_score_(signed)'; pass a DataFrame with "
+                    "only one."
+                )
+            elif has_unsigned:
+                df['influence_original'] = df['Influence_score_(unsigned)']
+                added_cols.append('influence_original')
+            elif has_signed:
+                df['influence_original'] = df['Influence_score_(signed)']
+                added_cols.append('influence_original')
+            else:
+                raise ValueError(
+                    "No influence score column found; expected "
+                    "'influence_original', 'Influence_score_(unsigned)', "
+                    "or 'Influence_score_(signed)'."
+                )
+
+        # Resolve target column, falling back to 'id'
+        if 'target' in df.columns:
+            target_col = 'target'
+        else:
+            df['_target'] = df['id']
+            target_col = '_target'
+            added_cols.append('_target')
+
+        # Resolve seed column, falling back to a single group
+        if 'seed' in df.columns:
+            seed_col = 'seed'
+        else:
+            df['_seed'] = '1'
+            seed_col = '_seed'
+            added_cols.append('_seed')
+
+        # Count seed neurons per seed group
+        n_sources = (
+            df.loc[df['is_seed'], seed_col]
+            .value_counts()
+            .rename('_n_sources')
+        )
+
+        # Sum influence per (target, seed) group
+        summed = (
+            df.groupby([target_col, seed_col], as_index=False)
+            ['influence_original']
+            .sum()
+            .rename(columns={'influence_original': '_summed'})
+        )
+
+        # Count distinct targets per seed group
+        n_targets = (
+            summed.groupby(seed_col)[target_col]
+            .count()
+            .rename('_n_targets')
+        )
+        summed['_n_targets'] = summed[seed_col].map(n_targets)
+        summed['_n_sources'] = summed[seed_col].map(n_sources)
+
+        # Apply exp(-const) floor on the magnitude before the log transform
+        # to avoid log(0) / log(-inf), then re-attach the original sign so
+        # that negative raw influence (signed mode) yields negative adjusted
+        # scores; magnitudes below the floor become 0 in either sign.
+        floor_val = np.exp(-const)
+
+        def _adjust(values):
+            sign = np.sign(values)
+            mag = np.maximum(np.abs(values), floor_val)
+            return sign * (np.log(mag) + const)
+
+        summed['adjusted_influence'] = _adjust(summed['_summed'])
+        summed['adjusted_influence_norm_by_targets'] = _adjust(
+            summed['_summed'] / summed['_n_targets'])
+        summed['adjusted_influence_norm_by_sources_and_targets'] = _adjust(
+            summed['_summed']
+            / (summed['_n_sources'] * summed['_n_targets']))
+
+        out_cols = [
+            'adjusted_influence',
+            'adjusted_influence_norm_by_targets',
+            'adjusted_influence_norm_by_sources_and_targets',
+        ]
+
+        # Replace NaN with 0
+        summed[out_cols] = summed[out_cols].fillna(0)
+
+        # Round to significant figures
+        def _signif(x):
+            if x == 0 or not np.isfinite(x):
+                return 0.0
+            mag = int(np.floor(np.log10(np.abs(x))))
+            return round(x, -mag + (signif - 1))
+
+        for col in out_cols:
+            summed[col] = summed[col].apply(_signif)
+
+        # Merge aggregated results back and deduplicate to one row per group
+        df = df.merge(
+            summed[[target_col, seed_col] + out_cols],
+            on=[target_col, seed_col],
+            how='left',
+        )
+        df = df.drop_duplicates(subset=[target_col, seed_col])
+
+        # Remove internally added helper columns
+        df = df.drop(
+            columns=[c for c in added_cols if c in df.columns],
+            errors='ignore',
+        )
+
+        return df.reset_index(drop=True)
+
+    def calculate_influence(self, seed_ids, silenced_neurons=[],
+                            adjust=True, adjust_const=24, adjust_signif=6):
         """This method calculates the influence score for the given
-        seed id and list of silenced neurons. It returns the results
-        as a pandas dataframe.
+        seed ids and list of silenced neurons.  It returns the results
+        as a pandas DataFrame containing the raw influence column
+        ('Influence_score_(unsigned)' or 'Influence_score_(signed)') and,
+        when adjust=True (the default), three log-compressed columns
+        produced by adjust_influence: adjusted_influence,
+        adjusted_influence_norm_by_targets, and
+        adjusted_influence_norm_by_sources_and_targets.  Set
+        adjust=False to return only the raw column.
+
+        adjust_const is the exp(-c) junk-node floor / +c shift used by
+        the log transform; see adjust_influence for the rationale.
+        adjust_signif is the number of significant figures the adjusted
+        columns are rounded to.
         """
         # map seed_ids to W_ids to get seed_vec
         seed_vec = np.zeros(self.n_neurons)
@@ -347,5 +512,9 @@ class InfluenceCalculator:
         self._normalize_W(W_norm)
         influence_vec = self._solve_lin_system(W_norm, -seed_vec)
         influence_df = self._build_influence_dataframe(influence_vec, seed_vec)
+
+        if adjust:
+            influence_df = self.adjust_influence(
+                influence_df, const=adjust_const, signif=adjust_signif)
 
         return influence_df
