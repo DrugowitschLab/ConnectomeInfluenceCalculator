@@ -53,22 +53,22 @@ class InfluenceCalculator:
 
         excluded_nts is a set or list of neurotransmitter names whose
         pre-neurons contribute nothing to W: their outgoing edges are
-        removed from the connectivity matrix entirely.  Independent of
-        signed=True/False.  Use this for transmitter classes whose net
-        sign at a given target depends on the receptor mix and so
-        cannot be assigned a single sign safely (e.g. dopamine,
-        serotonin, octopamine in C. elegans).
+        removed from the connectivity matrix entirely. Independent of
+        signed=True/False. Use this for transmitter classes whose net
+        sign at a given target depends on the receptor mix and so cannot
+        be assigned a single sign safely (e.g. dopamine, serotonin,
+        octopamine in C. elegans).
 
-        lambda_max is the target largest real eigenvalue of the
-        rescaled W after normalisation; W is scaled in place by
-        lambda_max / lambda_max(W) so that lambda_max of the rescaled W
-        equals lambda_max exactly.  Must satisfy 0 < lambda_max < 1 for
-        the steady-state solve to remain stable.  The amplification of
-        the leading eigenmode in (I - W_rescaled)^-1 is
-        1 / (1 - lambda_max), so the default 0.99 gives ~100x and a
-        smaller value (e.g. 0.5 -> 2x) damps the global mode and
-        exposes per-target seed-specificity at the cost of attenuating
-        long polysynaptic paths.
+        lambda_max is the target largest real eigenvalue of the rescaled
+        W after normalisation; W is scaled in place by
+        lambda_max / max(eigenvalue(W)) so that lambda_max of the rescaled 
+        W equals lambda_max exactly. Must satisfy 0 < lambda_max < 1 for
+        the steady-state solve to remain stable. The amplification of the
+        leading eigenmode in (I - W_rescaled)^-1 is 1 / (1 - lambda_max),
+        so the default 0.99 gives ~100x and a smaller value
+        (e.g. 0.5 -> 2x) damps the global mode and exposes per-target
+        seed-specificity at the cost of attenuating long polysynaptic
+        paths.
         """
         if signed and inhibitory_nts is None:
             raise ValueError(
