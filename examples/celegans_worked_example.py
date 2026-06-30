@@ -6,9 +6,11 @@ from every sensory neuron onto every non-sensory target, collapses
 bilateral pairs into cell classes by stripping the trailing L/R
 suffix on both seed and target sides (so AVAL/AVAR → AVA, AVDL/AVDR →
 AVD, IL2DL/IL2DR → IL2D), sums the raw influence per
-(target_class, seed_class), log-adjusts via adjust_influence with an
-auto-calibrated const, and renders the result as two heatmaps
-(unsigned and signed).
+(target_class, seed_class), log-adjusts via adjust_influence with a
+const auto-calibrated from a low percentile of the non-zero magnitudes
+(so it tracks the real signal floor and reproduces across machines
+rather than chasing solver round-off), and renders the result as two
+heatmaps (unsigned and signed).
 
 The heatmaps show the raw adjusted_influence values directly — no
 per-row min-max rescaling is applied — anchored at 0 and at the data
@@ -96,6 +98,20 @@ COUNT_THRESH = 0
 # (~2x) damps that mode and exposes per-target seed-specificity, at
 # the cost of attenuating long polysynaptic paths.
 LAMBDA_MAX = 0.5
+
+# Percentile of the non-zero per-(target, seed) |influence| sums used
+# to auto-calibrate the adjust_influence `const`, which sets both the
+# junk-node floor exp(-const) and the diverging colour-scale bound.
+# Anchoring to the absolute minimum (the 0th percentile) is NOT
+# portable: the smallest non-zero magnitude belongs to a
+# near-disconnected pair and is dominated by GMRES round-off (~1e-12),
+# which varies by PETSc/SLEPc/BLAS build and platform. Feeding that
+# into -log() inflates const by ~10 units, which shifts every real
+# value into the saturated top of the colormap and produces a
+# washed-out, machine-dependent heatmap. The 1st percentile tracks the
+# real signal floor instead, so const -- and the rendered figure --
+# reproduce across machines.
+CONST_PERCENTILE = 1.0
 
 
 def build_calculator(edges, meta, signed):
@@ -283,12 +299,16 @@ def main():
         sub_raw['target'] = sub_raw['target'].map(name_to_class)
         sub_raw['seed'] = sub_raw['seed'].map(name_to_class)
 
-        # Auto-calibrate const from the cell-class summed magnitudes so
-        # the smallest non-zero |sum| just clips to 0.
+        # Auto-calibrate const from the cell-class summed magnitudes.
+        # Anchor to CONST_PERCENTILE (a low percentile) rather than the
+        # absolute minimum: the smallest non-zero |sum| is solver
+        # round-off and is not reproducible across machines (see the
+        # CONST_PERCENTILE comment above). Everything below the
+        # resulting exp(-const) floor clips to 0.
         per_pair = (sub_raw.groupby(['target', 'seed'])[score_col]
                            .sum().abs())
         per_pair = per_pair[per_pair > 0]
-        const = float(-np.log(per_pair.min()))
+        const = float(-np.log(np.percentile(per_pair, CONST_PERCENTILE)))
 
         adjusted = InfluenceCalculator.adjust_influence(sub_raw, const=const)
         matrix = adjusted.pivot_table(index='target', columns='seed',

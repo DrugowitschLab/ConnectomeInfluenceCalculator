@@ -165,14 +165,14 @@ adjusted_influence = log(raw_influence) + const
 
 The plot above compares `adjusted_influence` (y-axis) against **graph-traversal depth** (x-axis) — the average number of synaptic hops a signal must traverse to reach a given target from the seed via shortest-path BFS through the connectome — for one seed neuron in the BANC connectome. Targets that are *directly* connected to the seed (red) sit at the top of the distribution; targets reached only by longer indirect chains (grey) sit lower. The relationship is almost linear (R² = 0.94, slope ≈ −1.3), which means each additional synaptic step costs roughly 1.3 units of `adjusted_influence` — so a four-hop target lands ≈ 5 units below a directly-connected one. This near-linear scaling is what makes the score easy to read off a heatmap and to compare across seed/target groups: differences in `adjusted_influence` map onto differences in *effective polysynaptic distance*, with the log transform turning the multiplicative gain stack of indirect paths into additive units.
 
-`const` defines the floor: any score below `exp(-const)` is clipped to zero (a "junk-node" cutoff for nodes that are nearly disconnected from the seed). The default `const=24` is calibrated for the *Drosophila* BANC connectome (~130k neurons, minimum meaningful score ~3.8e-11). For smaller networks, compute it from your data:
+`const` defines the floor: any score below `exp(-const)` is clipped to zero (a "junk-node" cutoff for nodes that are nearly disconnected from the seed). The default `const=24` is calibrated for the *Drosophila* BANC connectome (~130k neurons, minimum meaningful score ~3.8e-11). For smaller networks, compute it from your data — but anchor to a **low percentile** of the non-zero scores, not the absolute minimum. The single smallest non-zero score belongs to a near-disconnected pair and is dominated by iterative-solver (GMRES) round-off (`~1e-12`), which varies by PETSc/SLEPc/BLAS build and platform; feeding it to `-log()` makes `const` — and the whole colour scale — non-reproducible and pushes the real signal into a saturated band. A low percentile tracks the true signal floor and reproduces across machines:
 
 ```python
 import numpy as np
 results = ic.calculate_influence(seed_neurons)
 raw_col = 'Influence_score_(unsigned)'  # or 'Influence_score_(signed)'
-min_nonzero = results.loc[results[raw_col] > 0, raw_col].min()
-const = -np.log(min_nonzero)
+nonzero = results.loc[results[raw_col] > 0, raw_col].abs()
+const = -np.log(np.percentile(nonzero, 1))  # 1st-percentile floor
 adjusted = InfluenceCalculator.adjust_influence(results, const=const)
 ```
 
@@ -222,7 +222,7 @@ The full script — including the heatmaps below, cell-class summation across bi
 |---|---|
 | `inhibitory_nts` / `excluded_nts` | which `top_nt` values are negated vs zeroed in signed mode. The library has no per-organism defaults; only acetylcholine (positive) and GABA (negated) have unambiguous signs in *C. elegans*, so the rest are excluded. The example file's header comment lists *Drosophila* and *C. elegans* conventions side by side. |
 | `lambda_max` | target spectral radius of W̃ — the "reverb knob" introduced in the [Description](#description). Default `0.99` (gain `100×`) makes every target column share a near-identical shape; `0.5` (gain `2×`, used here) exposes per-target seed specificity. |
-| `const` (for `adjust_influence`) | auto-calibrated from the data so the smallest non-zero magnitude maps to 0 — see the [`adjust_influence`](#adjust_influence-log-compression-and-grouping) section above. |
+| `const` (for `adjust_influence`) | auto-calibrated from a low percentile of the non-zero magnitudes (not the absolute minimum, which is solver round-off) so it reproduces across machines — see the [`adjust_influence`](#adjust_influence-log-compression-and-grouping) section above. |
 
 ![Unsigned heatmap](docs/images/influence_heatmap_unsigned.png)
 
