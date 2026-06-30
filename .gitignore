@@ -6,3 +6,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 Influence/
+
+# Claude Code local state / memories
+/.claude/
+CLAUDE.md
