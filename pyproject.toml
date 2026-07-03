@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "InfluenceCalculator"
-version = "0.2.0"
+version = "2.0.0"
 description = "Compute neural influence scores on connectome graphs (Drosophila, C. elegans, ...)"
 authors = [
     {name = "Zaki AJABI", email = "zaki_ajabi@hms.harvard.edu"},
